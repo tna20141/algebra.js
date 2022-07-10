@@ -180,13 +180,15 @@ Fraction.prototype.toString = function() {
     }
 };
 
-Fraction.prototype.toTex = function() {
+Fraction.prototype.toTex = function(options = {}) {
     if (this.numer === 0) {
         return "0";
     } else if (this.denom === 1) {
         return this.numer.toString();
     } else if (this.denom === -1) {
         return (-this.numer).toString();
+    } else if (options.extractSign && this.numer < 0 && this.denom > 0) {
+        return "-\\frac{" + Math.abs(this.numer) + "}{" + this.denom + "}";
     } else {
         return "\\frac{" + this.numer + "}{" + this.denom + "}";
     }

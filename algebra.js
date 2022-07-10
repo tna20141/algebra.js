@@ -10,9 +10,9 @@ var parse = function(input){
 	return result;
 };
 
-var toTex = function(input) {
+var toTex = function(input, options) {
     if (input instanceof Fraction || input instanceof Expression || input instanceof Equation) {
-        return input.toTex();
+        return input.toTex(options);
     } else if (input instanceof Array) {
         return input.map(
             function(e) {
