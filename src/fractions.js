@@ -32,6 +32,27 @@ Fraction.prototype.reduce = function() {
     return copy;
 };
 
+Fraction.prototype.greaterThan = function(fraction) {
+    if(fraction instanceof Fraction) {
+        var thisReduced = this.reduce();
+        var thatReduced = fraction.reduce();
+        return (thisReduced.numer * thatReduced.denom) > (thatReduced.numer * thisReduced.denom);
+    }else{
+        return false;
+    }
+}
+
+Fraction.prototype.lessThan = function(fraction) {
+    if(fraction instanceof Fraction) {
+        return fraction.greaterThan(this);
+        var thisReduced = this.reduce();
+        var thatReduced = fraction.reduce();
+        return (thisReduced.numer * thatReduced.denom) > (thatReduced.numer * thisReduced.denom);
+    }else{
+        return false;
+    }
+}
+
 Fraction.prototype.equalTo = function(fraction) {
     if(fraction instanceof Fraction) {
         var thisReduced = this.reduce();
