@@ -187,7 +187,7 @@ Fraction.prototype.toTex = function(options = {}) {
         return this.numer.toString();
     } else if (this.denom === -1) {
         return (-this.numer).toString();
-    } else if (options.extractSign && this.numer < 0 && this.denom > 0) {
+    } else if (!options.preserveSign && this.numer < 0 && this.denom > 0) {
         return "-\\frac{" + Math.abs(this.numer) + "}{" + this.denom + "}";
     } else {
         return "\\frac{" + this.numer + "}{" + this.denom + "}";
