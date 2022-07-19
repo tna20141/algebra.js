@@ -423,6 +423,26 @@ Expression.prototype._maxDegreeOfVariable = function(variable) {
     return this.terms.reduce(function(p,c){return Math.max(p,c.maxDegreeOfVariable(variable));},1);
 };
 
+Expression.prototype.leftestSign = function(variable) {
+    const leftestTerm = this.terms.reduce(
+        function(p,c){
+            if (!p.term || p.term.maxDegreeOfVariable() < c.maxDegreeOfVariable()) {
+              return { term: c, coeff: c.coefficient().copy() };
+            }
+            return p;
+        },
+        { term: null, coeff: null }
+    );
+    const zero = new Fraction(0, -1);
+    if (!leftestTerm.coeff || leftestTerm.coeff.equalTo(zero)) {
+      return 0;
+    }
+    if (leftestTerm.coeff.greaterThan(zero)) {
+      return 1;
+    }
+    return -1;
+};
+
 Expression.prototype._quadraticCoefficients = function() {
     // This function isn't used until everything has been moved to the LHS in Equation.solve.
     var a;
